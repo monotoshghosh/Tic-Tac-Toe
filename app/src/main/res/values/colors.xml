@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#D80202</color>
+    <color name="green">#3EBD08</color>
+    <color name="xcolor">#D70202</color>
+    <color name="ocolor">#3EBC08</color>
+    <color name="grey_statusBarColor">#BCBABA</color>
 </resources>
