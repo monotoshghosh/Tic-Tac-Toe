@@ -16,12 +16,11 @@ class team_selection : AppCompatActivity() {
         binding = ActivityTeamSelectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (isDarkMode(this)) {
+        if (isDarkThemeCheck.isDarkMode(this)) {
             window.statusBarColor = ContextCompat.getColor(this, R.color.grey_statusBarColor);
         }
         else {
             window.statusBarColor = ContextCompat.getColor(this, R.color.white)
-
         }
         
         binding.playPerson.setOnClickListener { 
@@ -30,20 +29,8 @@ class team_selection : AppCompatActivity() {
         binding.playComputer.setOnClickListener {
             Toast.makeText(this, "I am still Working", Toast.LENGTH_SHORT).show()
         }
-    
-        
-        
-        
-        
-        
-        
+
         
     }
-    
-    private fun isDarkMode(context: Context): Boolean {
-        return when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
-        }
-    }
+
 }

@@ -56,14 +56,18 @@
                 app:hintEnabled="false">
 
                 <EditText
+                    android:id="@+id/editTextPlayer1"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
                     android:drawableStart="@drawable/xicon"
                     android:drawablePadding="16dp"
                     android:hint="Player 1"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
                     android:textColorHint="#AEAAAA"
-                    android:textSize="23dp" />
+                    android:textSize="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,14 +84,18 @@
                 app:hintEnabled="false">
 
                 <EditText
+                    android:id="@+id/editTextPlayer2"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
                     android:drawableStart="@drawable/oicon"
                     android:drawablePadding="16dp"
                     android:hint="Player 2"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
                     android:textColorHint="#AEAAAA"
-                    android:textSize="23dp" />
+                    android:textSize="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,6 +104,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/btnNextInPlayersName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NEXT"

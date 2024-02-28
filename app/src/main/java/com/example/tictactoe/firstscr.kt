@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.core.content.ContextCompat
 import com.example.tictactoe.databinding.ActivityFirstscrBinding
-import com.example.tictactoe.databinding.ActivityMainBinding
 
 class firstscr : AppCompatActivity() {
     private lateinit var binding: ActivityFirstscrBinding
@@ -23,12 +22,10 @@ class firstscr : AppCompatActivity() {
             window.statusBarColor=ContextCompat.getColor(this,R.color.white)
 
 
-
         Handler().postDelayed({
             startActivity(Intent(this,team_selection::class.java))
             finish()
         },1500)
-
 
     }
 
