@@ -53,16 +53,20 @@ class PlayersName : AppCompatActivity() {
         //Play With Computer --- "Left"
 
         //scr3
+
         //-----
         //Player's Name should be clear on pressing back button of scr4
+        // sound when typing
 
 
         //scr4
         //------
+        // onopening say game start sound
         //Player Box--- "X" ----COLOR CHANGE INITIALLY X IS COMING RED -- BUT SHOULD BE GREEN -- MEANS ON WINNING/DRAW/RESET X TURNS GREEN
         //Player Name should be appear
         //On Winning LINE should appear
         //Dialog box on Winning/Draw
+        // BOX CLICKING SOUND
 
 
         //  MORE
