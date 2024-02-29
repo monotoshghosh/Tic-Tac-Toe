@@ -28,7 +28,7 @@ class team_selection : AppCompatActivity() {
             startActivity(Intent(this,PlayersName::class.java))
         }
         binding.playComputer.setOnClickListener {
-            BtnSound.buttonSound(this)
+            BtnSound.buttonErrorSound(this)
             Toast.makeText(this, "I am still Working", Toast.LENGTH_SHORT).show()
         }
 
