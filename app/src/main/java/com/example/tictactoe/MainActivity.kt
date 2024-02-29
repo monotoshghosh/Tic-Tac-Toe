@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun resetGame(){
+        BtnSound.buttonSound(this)
         binding.btn1.text=""
         binding.btn2.text=""
         binding.btn3.text=""

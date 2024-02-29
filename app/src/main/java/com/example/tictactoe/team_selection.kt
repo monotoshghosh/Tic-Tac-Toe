@@ -23,10 +23,12 @@ class team_selection : AppCompatActivity() {
             window.statusBarColor = ContextCompat.getColor(this, R.color.white)
         }
         
-        binding.playPerson.setOnClickListener { 
+        binding.playPerson.setOnClickListener {
+            BtnSound.buttonSound(this)
             startActivity(Intent(this,PlayersName::class.java))
         }
         binding.playComputer.setOnClickListener {
+            BtnSound.buttonSound(this)
             Toast.makeText(this, "I am still Working", Toast.LENGTH_SHORT).show()
         }
 

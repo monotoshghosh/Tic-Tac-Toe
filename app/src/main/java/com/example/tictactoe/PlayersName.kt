@@ -1,6 +1,7 @@
 package com.example.tictactoe
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,9 @@ class PlayersName : AppCompatActivity() {
 
 
         binding.btnNextInPlayersName.setOnClickListener {
+
+            BtnSound.buttonSound(this)      // OBJECT CREATED
+
             if(binding.editTextPlayer1.text.toString().isNotEmpty() && binding.editTextPlayer2.text.toString().isNotEmpty()){
                 startActivity(Intent(this,MainActivity::class.java))
             }
@@ -36,6 +40,8 @@ class PlayersName : AppCompatActivity() {
 
 
         // ALL --- // status bar text color
+        // typing sound in scr3
+        // error sound when btn pressed if text is empty
 
         // scr1
         //-------
