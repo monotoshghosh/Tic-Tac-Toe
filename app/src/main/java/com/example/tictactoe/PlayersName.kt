@@ -27,12 +27,14 @@ class PlayersName : AppCompatActivity() {
 
         binding.btnNextInPlayersName.setOnClickListener {
 
-            BtnSound.buttonSound(this)      // OBJECT CREATED
+                  // OBJECT CREATED
 
             if(binding.editTextPlayer1.text.toString().isNotEmpty() && binding.editTextPlayer2.text.toString().isNotEmpty()){
+                BtnSound.buttonSound(this)
                 startActivity(Intent(this,MainActivity::class.java))
             }
             else{
+                BtnSound.buttonErrorSound(this)
                 Toast.makeText(this, "Please Enter Both the Players Name", Toast.LENGTH_SHORT).show()
             }
         }
@@ -40,7 +42,8 @@ class PlayersName : AppCompatActivity() {
 
         // ALL --- // status bar text color
         // typing sound in scr3
-        // error sound when btn pressed if text is empty
+        // button vibrate
+        // keyboard button --- sound and vibrate
 
         // scr1
         //-------

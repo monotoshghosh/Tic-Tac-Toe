@@ -22,5 +22,13 @@ object BtnSound {
             mp.release()
         }
     }
+    fun buttonResetSound(activity: Activity){
+        val mp: MediaPlayer = MediaPlayer.create(activity,R.raw.resetsound)
+        mp.setVolume(0.3f,0.3f)
+        mp.start()
+        mp.setOnCompletionListener{
+            mp.release()
+        }
+    }
 
 }

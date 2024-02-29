@@ -67,6 +67,7 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
                     android:textColorHint="#AEAAAA"
+                    android:soundEffectsEnabled="true"
                     android:textSize="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +95,7 @@
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
+                    android:soundEffectsEnabled="true"
                     android:textColorHint="#AEAAAA"
                     android:textSize="20dp" />
 
