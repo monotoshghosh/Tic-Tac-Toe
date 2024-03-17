@@ -2,7 +2,13 @@ package com.example.tictactoe
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.tictactoe.databinding.ActivityPlayersNameBinding
@@ -14,79 +20,71 @@ class PlayersName : AppCompatActivity() {
     private lateinit var binding: ActivityPlayersNameBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityPlayersNameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(isDarkMode(this)){
-            window.statusBarColor=ContextCompat.getColor(this,R.color.grey_statusBarColor)
+        window.apply {
+            // SET THE STATUS BAR COLOR TO WHITE
+            statusBarColor = ContextCompat.getColor(this@PlayersName, android.R.color.white)
+
+            // SET THE STATUS BAR ICONS TO BE DARK
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
         }
-        else{
-            window.statusBarColor=ContextCompat.getColor(this,R.color.white)
+
+        binding.btnBackPlayersname.setOnClickListener {  // TO MOVE TO TEAM SELECTION ACTIVITY
+            finish()
         }
 
 
         binding.btnNextInPlayersName.setOnClickListener {
-
-                  // OBJECT CREATED
-
             if(binding.editTextPlayer1.text.toString().isNotEmpty() && binding.editTextPlayer2.text.toString().isNotEmpty()){
+
                 BtnSound.buttonSound(this)
-                startActivity(Intent(this,MainActivity::class.java))
+
+                intent =Intent(this@PlayersName,MainActivity::class.java)
+                val player1Name =binding.editTextPlayer1.text.toString()  // PASSING THE PLAYERS NAME
+                val player2Name =binding.editTextPlayer2.text.toString()
+                intent.putExtra("player1_NameToDisplay",player1Name)
+                intent.putExtra("player2_NameToDisplay",player2Name)
+                startActivity(intent)
+
+                Handler().postDelayed({                         // CLEARING THE PLAYERS NAME AFTER CLICKING NEXT..
+                    binding.editTextPlayer1.text.clear()
+                    binding.editTextPlayer2.text.clear()},
+                    200)
+
             }
-            else{
+            else{                                              // IF FIELD IS EMPTY THEN VIBRATE AND TOAST
                 BtnSound.buttonErrorSound(this)
-                Toast.makeText(this, "Please Enter Both the Players Name", Toast.LENGTH_SHORT).show()
+                obj.vibrate(this)
+                Toast.makeText(this, "Please enter both the Players name", Toast.LENGTH_SHORT).show()
             }
         }
 
 
-        // ALL --- // status bar text color
-        // typing sound in scr3
-        // button vibrate
         // keyboard button --- sound and vibrate
+        // BACK BUTTON ON SCREEN
 
-        // scr1
-        //-------
 
         // scr2
         //-------
         //Play With Computer --- "Left"
 
-        //scr3
 
-        //-----
-        //Player's Name should be clear on pressing back button of scr4
-        // sound when typing
-
-
-        //scr4
+        //MAIN ACTIVITY SCREEN
         //------
-        // onopening say game start sound
-        //Player Box--- "X" ----COLOR CHANGE INITIALLY X IS COMING RED -- BUT SHOULD BE GREEN -- MEANS ON WINNING/DRAW/RESET X TURNS GREEN
-        //Player Name should be appear
+
+        // on opening say game start sound
         //On Winning LINE should appear
         //Dialog box on Winning/Draw
         // BOX CLICKING SOUND
 
-
-        //  MORE
-        //========
-        // sound and Animation
-        // Players Name
-        // dialog box on opening -> restart / close
-
-
-        // CLEAR TEXT
-        // STATUS BAR
-        // NAME TRANSFER
-
     }
     override fun onBackPressed() { // THIS WILL BE IN THE MAIN ACTIVITY
 
-        super.onBackPressed()
-        binding.editTextPlayer1.text.clear()
-        binding.editTextPlayer2.text.clear()
-
+        super.onBackPressed() // FOR DEFAULT WORK OF BACK BUTTON
         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
     }
 }

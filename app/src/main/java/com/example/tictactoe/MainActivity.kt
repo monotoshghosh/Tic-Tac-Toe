@@ -13,19 +13,30 @@ class MainActivity : AppCompatActivity() {
     var flag =0      // WHICH PLAYER'S TURN
     var count =0     // IT WILL CHECK WHEN ALL THE BOXs ARE PRESSED
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var player1NameReceiving: String
+    lateinit var player2NameReceiving : String
+
+    private lateinit var binding: ActivityMainBinding  // ALWAYS INITIALIZE SHOULD BE < lateinit var & outside onCreate >
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.PlayersTurnBox.text="Player X"
+        window.statusBarColor =ContextCompat.getColor(this,R.color.MainScreenColor)
+        window.decorView.systemUiVisibility = 0
+
 
         binding.btnReset.setOnClickListener {
             resetGame()
-//            Toast.makeText(this, "I am under designing process", Toast.LENGTH_SHORT).show()
         }
-        
+
+        player1NameReceiving = intent.getStringExtra("player1_NameToDisplay").toString()   // ALWAYS DECLARE THE getExtra inside onCreate()..
+        player2NameReceiving = intent.getStringExtra("player2_NameToDisplay").toString()
+
+        binding.currPlayerNameDisplay.text=player1NameReceiving     // ININTIALLY THE currPlayerNameDisplay IS EMPTY
+        binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.red))
+
     }
 
     fun check(view: View) {
@@ -33,19 +44,27 @@ class MainActivity : AppCompatActivity() {
         val btnCurrent = view as Button
         count++
 
-
         if (btnCurrent.text == "") {        // CHECK IF BOX IS ALREADY PRESSED
 
-            if (flag == 0) {                // PLAYER ONE TURN
+            if (flag == 0) {                // PLAYER ONE TURN (X)
                 btnCurrent.text = "X"
                 btnCurrent.setTextColor(ContextCompat.getColor(this,R.color.red))
+
+                binding.currPlayerNameDisplay.text = player2NameReceiving
+                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.green2))
+
                 binding.PlayersTurnBox.text="O"
                 binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this,R.color.green))
+
                 flag = 1
 
-            } else {                        // PLAYER TWO TURN
+            } else {                        // PLAYER TWO TURN (O)
                 btnCurrent.text = "O"
                 btnCurrent.setTextColor(ContextCompat.getColor(this,R.color.green))
+
+                binding.currPlayerNameDisplay.text = player1NameReceiving
+                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.red))
+
                 binding.PlayersTurnBox.text="X"
                 binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this,R.color.red))
 
@@ -103,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun resetGame(){
-        BtnSound.buttonSound(this)
+        BtnSound.buttonResetSound(this)
         binding.btn1.text=""
         binding.btn2.text=""
         binding.btn3.text=""
@@ -117,6 +136,10 @@ class MainActivity : AppCompatActivity() {
         flag=0
         count =0
         binding.PlayersTurnBox.text="X"
+        binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this,R.color.red))
+        binding.currPlayerNameDisplay.text =player1NameReceiving
+        binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.red))
+
     }
 
 }

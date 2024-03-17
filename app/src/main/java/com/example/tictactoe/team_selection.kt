@@ -1,10 +1,9 @@
 package com.example.tictactoe
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.tictactoe.databinding.ActivityTeamSelectionBinding
@@ -16,18 +15,22 @@ class team_selection : AppCompatActivity() {
         binding = ActivityTeamSelectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (isDarkThemeCheck.isDarkMode(this)) {
-            window.statusBarColor = ContextCompat.getColor(this, R.color.grey_statusBarColor);
-        }
-        else {
-            window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)  // SAME AS DID IN THE firstscr.kt
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+
+        binding.btnBackTeamSelection.setOnClickListener { // EXIT THE GAME ON CLICKING THE BACK_ICON
+            finish()
         }
         
-        binding.playPerson.setOnClickListener {
+        binding.playPerson.setOnClickListener {             //   ACTION ON CLICKING THE PLAY WITH PERSON
+            obj.vibrate(this)
             BtnSound.buttonSound(this)
             startActivity(Intent(this,PlayersName::class.java))
         }
-        binding.playComputer.setOnClickListener {
+        binding.playComputer.setOnClickListener {            //   ACTION ON CLICKING THE PLAY WITH COMPUTER
+            obj.vibrate(this)
             BtnSound.buttonErrorSound(this)
             Toast.makeText(this, "I am still Working", Toast.LENGTH_SHORT).show()
         }

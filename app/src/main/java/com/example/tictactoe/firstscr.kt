@@ -1,11 +1,10 @@
 package com.example.tictactoe
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.tictactoe.databinding.ActivityFirstscrBinding
 
@@ -16,24 +15,16 @@ class firstscr : AppCompatActivity() {
         binding = ActivityFirstscrBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (isDarkMode(this)) {
-            window.statusBarColor = ContextCompat.getColor(this, R.color.grey_statusBarColor);
-        }else
-            window.statusBarColor=ContextCompat.getColor(this,R.color.white)
+        window.apply {    // SETTING THE STATUS BAR
+            statusBarColor=ContextCompat.getColor(this@firstscr,R.color.white) // BACKGROUND -> WHITE
+            decorView.systemUiVisibility= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR        // ICONS -> DARK
+        }
 
-
-        Handler().postDelayed({
+        Handler().postDelayed({       // SHIFTING TO NEW ACTIVITY -> AFTER FEW SECONDS
             startActivity(Intent(this,team_selection::class.java))
             finish()
         },1500)
 
-    }
-
-    fun isDarkMode(context: Context): Boolean {
-        return when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
-        }
     }
 
 }

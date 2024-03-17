@@ -6,11 +6,23 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".team_selection"
-    >
+    tools:context=".team_selection">
 
+
+    <ImageView
+        android:id="@+id/btnBackTeamSelection"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/backbtn1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -23,49 +35,51 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_margin="15dp"
             android:layout_height="58dp"
-            app:cardElevation="11dp"
-            app:cardCornerRadius="28dp"
+            android:layout_margin="15dp"
             android:backgroundTint="#0176B4"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="11dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <Button
                 android:id="@+id/playPerson"
                 android:layout_width="278dp"
                 android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#0176B5"
+
                 android:text="Play With Person"
                 android:textColor="@color/white"
-
-                android:textStyle="bold"
-                android:backgroundTint="#0176B5"
-                android:layout_gravity="center"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_margin="15dp"
-            app:cardElevation="11dp"
             android:layout_height="58dp"
-            app:cardCornerRadius="28dp"
+            android:layout_margin="15dp"
             android:backgroundTint="#0176B4"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="11dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <Button
                 android:id="@+id/playComputer"
                 android:layout_width="278dp"
                 android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#0176B5"
                 android:text="Play With Computer"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:backgroundTint="#0176B5"
-                android:layout_gravity="center"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
 

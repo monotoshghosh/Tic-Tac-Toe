@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:fitsSystemWindows="false"
     tools:context=".PlayersName">
+
+    <ImageView
+        android:id="@+id/btnBackPlayersname"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/backbtn1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
@@ -64,10 +77,10 @@
                     android:hint="Player 1"
                     android:inputType="text"
                     android:singleLine="true"
+                    android:soundEffectsEnabled="true"
                     android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
                     android:textColorHint="#AEAAAA"
-                    android:soundEffectsEnabled="true"
                     android:textSize="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -91,11 +104,11 @@
                     android:drawableStart="@drawable/oicon"
                     android:drawablePadding="16dp"
                     android:hint="Player 2"
-                    android:singleLine="true"
                     android:inputType="text"
+                    android:singleLine="true"
+                    android:soundEffectsEnabled="true"
                     android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
-                    android:soundEffectsEnabled="true"
                     android:textColorHint="#AEAAAA"
                     android:textSize="20dp" />
 
