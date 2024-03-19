@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="290dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/winnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="18dp"
+        android:text="Monotosh"
+        android:textColor="#49454F"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/winnerTrophy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Win"
+        android:textColor="#49454F"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/winnerTrophy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/winnerTrophy" />
+
+    <ImageView
+        android:id="@+id/winnerTrophy"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="59dp"
+        android:src="@drawable/winner2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winnerName" />
+
+    <Button
+        android:id="@+id/replay_dialog_winner"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="@color/green2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
+
+    <Button
+        android:id="@+id/cancel_dialog_winner"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#CC0606"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/replay"
+        app:layout_constraintBottom_toBottomOf="@+id/replay_dialog_winner"
+        app:layout_constraintEnd_toEndOf="@+id/replay_dialog_winner"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="@+id/replay_dialog_winner"
+        app:layout_constraintTop_toTopOf="@+id/replay_dialog_winner"
+        app:layout_constraintVertical_bias="0.526" />
+
+<!--    <ImageView-->
+<!--        android:layout_width="24dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        android:src="@drawable/exit"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/cancel_dialog_winner"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/cancel_dialog_winner"-->
+<!--        app:layout_constraintHorizontal_bias="0.453"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/cancel_dialog_winner"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/cancel_dialog_winner"-->
+<!--        app:layout_constraintVertical_bias="0.526" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

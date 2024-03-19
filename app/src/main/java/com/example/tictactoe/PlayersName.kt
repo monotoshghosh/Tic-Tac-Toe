@@ -68,6 +68,9 @@ class PlayersName : AppCompatActivity() {
         // BACK BUTTON ON SCREEN
 
 
+        // remove the constraint in MainActivity
+
+
         // scr2
         //-------
         //Play With Computer --- "Left"
@@ -80,6 +83,9 @@ class PlayersName : AppCompatActivity() {
         //On Winning LINE should appear
         //Dialog box on Winning/Draw
         // BOX CLICKING SOUND
+
+
+        // REMOVE ALL THE RESET() OF WINNING
 
     }
     override fun onBackPressed() { // THIS WILL BE IN THE MAIN ACTIVITY

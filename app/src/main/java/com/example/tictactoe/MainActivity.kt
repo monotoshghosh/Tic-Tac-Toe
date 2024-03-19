@@ -1,12 +1,16 @@
 package com.example.tictactoe
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.tictactoe.databinding.ActivityMainBinding
+import com.bumptech.glide.Glide
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var player1NameReceiving: String
     lateinit var player2NameReceiving : String
+
+    lateinit var dialog: Dialog
 
     private lateinit var binding: ActivityMainBinding  // ALWAYS INITIALIZE SHOULD BE < lateinit var & outside onCreate >
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +31,35 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor =ContextCompat.getColor(this,R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
+
+        // FOR DIALOG BOX
+        dialog = Dialog(this)
+        dialog.setContentView(R.layout.cust_layout_dialog_box_winner)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_box_shape)
+//        dialog.setCancelable(false)        // TO PREVENT THE DIALOG FROM CLOSING (TOUCHING OUTSIDE/BACK BUTTON)
+
+        binding.buttontest.setOnClickListener {
+            dialog.show()
+
+            val replayBtn = dialog.findViewById<Button>(R.id.replay_dialog_winner)
+            replayBtn.setOnClickListener {
+                resetGame()
+                dialog.dismiss()
+            }
+
+            val exitBtn = dialog.findViewById<Button>(R.id.cancel_dialog_winner)
+            exitBtn.setOnClickListener {
+                finishAffinity()
+            }
+        }
+
+        // FOR ANIMATED BACKGROUND
+        val backBtnGif= binding.btnBackMainActivity
+        binding.btnBackMainActivity.setOnClickListener {
+            Glide.with(this).asGif().load(R.drawable.backbtn2gif).into(backBtnGif) // ANIMATED BACK BUTTON
+
+            Handler().postDelayed({ finish()}, 3000)
+        }
 
 
         binding.btnReset.setOnClickListener {
@@ -86,38 +121,50 @@ class MainActivity : AppCompatActivity() {
             if(b1==b2 && b2==b3 && b3!=""){
                 Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
                 resetGame()
+
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving) // FUNCTION CALL TO CHECK WHICH PLAYER WON( NAME )
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)  // FUNCTION TO CALL DIALOG BOX
             }
             else if(b4==b5 && b5==b6 && b6!=""){
                 Toast.makeText(this, "Winner $b4", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(b7==b8 && b8==b9 && b9!=""){
                 Toast.makeText(this, "Winner $b7", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(b1==b4 && b4==b7 && b7!=""){
                 Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(b2==b5 && b5==b8 && b8!=""){
                 Toast.makeText(this, "Winner $b2", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(b3==b6 && b6==b9 && b9!=""){
                 Toast.makeText(this, "Winner $b3", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(b1==b5 && b5==b9 && b9!=""){
                 Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(b3==b5 && b5==b7 && b7!=""){
                 Toast.makeText(this, "Winner $b3", Toast.LENGTH_SHORT).show()
                 resetGame()
+
             }
             else if(count==9){
                 Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
                 resetGame()
+
+                // DRAW FUNCTION TO BE CALLED HERE.......
             }
         }
     }
