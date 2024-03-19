@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttontest.setOnClickListener {
             dialog.show()
 
-            val replayBtn = dialog.findViewById<Button>(R.id.replay_dialog_winner)
+            val replayBtn = dialog.findViewById<Button>(R.id.replay_Btn_dialog_draw)
             replayBtn.setOnClickListener {
                 resetGame()
                 dialog.dismiss()
@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             exitBtn.setOnClickListener {
                 finishAffinity()
             }
+        }
+
+        binding.drawTest.setOnClickListener {
+            obj.drawDialogBox(this,::resetGame)
         }
 
         // FOR ANIMATED BACKGROUND
@@ -129,40 +133,63 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Winner $b4", Toast.LENGTH_SHORT).show()
                 resetGame()
 
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
+
             }
             else if(b7==b8 && b8==b9 && b9!=""){
                 Toast.makeText(this, "Winner $b7", Toast.LENGTH_SHORT).show()
                 resetGame()
+
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
 
             }
             else if(b1==b4 && b4==b7 && b7!=""){
                 Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
                 resetGame()
 
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
+
             }
             else if(b2==b5 && b5==b8 && b8!=""){
                 Toast.makeText(this, "Winner $b2", Toast.LENGTH_SHORT).show()
                 resetGame()
+
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
 
             }
             else if(b3==b6 && b6==b9 && b9!=""){
                 Toast.makeText(this, "Winner $b3", Toast.LENGTH_SHORT).show()
                 resetGame()
 
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
+
             }
             else if(b1==b5 && b5==b9 && b9!=""){
                 Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
                 resetGame()
+
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
 
             }
             else if(b3==b5 && b5==b7 && b7!=""){
                 Toast.makeText(this, "Winner $b3", Toast.LENGTH_SHORT).show()
                 resetGame()
 
+                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
+                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
+
             }
             else if(count==9){
                 Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
                 resetGame()
+
+                obj.drawDialogBox(this,::resetGame)
 
                 // DRAW FUNCTION TO BE CALLED HERE.......
             }

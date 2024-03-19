@@ -6,11 +6,12 @@ import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.view.View
-import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import com.bumptech.glide.Glide
 
 object obj {
     fun vibrate(context: Context, duration: Long = 200) {           // FUNC FOR VIBRATION
@@ -29,6 +30,17 @@ object obj {
         dialog.setCancelable(false)        // TO PREVENT THE DIALOG FROM CLOSING (TOUCHING OUTSIDE/BACK BUTTON)
         dialog.show()
 
+        val WinningImage = dialog.findViewById<ImageView>(R.id.winnerTrophyImg)
+        Glide.with(context).asGif().load(R.drawable.winnertrophy1).into(WinningImage)
+
+        val cele1Val =dialog.findViewById<ImageView>(R.id.celeID1)
+        Glide.with(context).asGif().load(R.drawable.cele1).into(cele1Val)
+
+        val cele2Val =dialog.findViewById<ImageView>(R.id.celeID2)
+        Glide.with(context).asGif().load(R.drawable.cele2).into(cele2Val)
+
+
+
 
         val WinnerName =dialog.findViewById<TextView>(R.id.winnerName)
         WinnerName.text = winnerName
@@ -42,7 +54,7 @@ object obj {
         }
 
 
-        val replayBtn = dialog.findViewById<Button>(R.id.replay_dialog_winner)
+        val replayBtn = dialog.findViewById<Button>(R.id.replay_Btn_dialog_draw)
         replayBtn.setOnClickListener {
             resetGame()
             dialog.dismiss()
@@ -59,6 +71,26 @@ object obj {
             Person1Name
         else
             Person2Name
+    }
+
+    fun drawDialogBox(context: Context,resetGame: () -> Unit){
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.cust_layout_dialog_box_draw)
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_box_shape)
+        dialog.setCancelable(false)
+        dialog.show()
+
+        val drawDialogBoxEndGame = dialog.findViewById<ImageView>(R.id.drawDialogBoxEndGame)
+        drawDialogBoxEndGame.setOnClickListener {
+            (context as Activity).finishAffinity()
+        }
+
+        val replay_DrawDialogBox = dialog.findViewById<Button>(R.id.replay_Btn_dialog_draw)
+        replay_DrawDialogBox.setOnClickListener {
+            resetGame()
+            dialog.dismiss()
+        }
+
     }
 
 }

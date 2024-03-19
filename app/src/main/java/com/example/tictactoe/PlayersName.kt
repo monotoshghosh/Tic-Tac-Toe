@@ -65,11 +65,6 @@ class PlayersName : AppCompatActivity() {
 
 
         // keyboard button --- sound and vibrate
-        // BACK BUTTON ON SCREEN
-
-
-        // remove the constraint in MainActivity
-
 
         // scr2
         //-------
@@ -81,7 +76,6 @@ class PlayersName : AppCompatActivity() {
 
         // on opening say game start sound
         //On Winning LINE should appear
-        //Dialog box on Winning/Draw
         // BOX CLICKING SOUND
 
 
