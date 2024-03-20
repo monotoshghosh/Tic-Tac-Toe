@@ -21,12 +21,12 @@ class team_selection : AppCompatActivity() {
 
 
         binding.btnBackTeamSelection.setOnClickListener { // EXIT THE GAME ON CLICKING THE BACK_ICON
+            BtnSound.backBtn(this)
             finish()
         }
         
         binding.playPerson.setOnClickListener {             //   ACTION ON CLICKING THE PLAY WITH PERSON
-            obj.vibrate(this)
-            BtnSound.buttonSound(this)
+            BtnSound.mainBtns(this)
             startActivity(Intent(this,PlayersName::class.java))
         }
         binding.playComputer.setOnClickListener {            //   ACTION ON CLICKING THE PLAY WITH COMPUTER

@@ -32,34 +32,12 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor =ContextCompat.getColor(this,R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
 
-        // FOR DIALOG BOX
-        dialog = Dialog(this)
-        dialog.setContentView(R.layout.cust_layout_dialog_box_winner)
-        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_box_shape)
-//        dialog.setCancelable(false)        // TO PREVENT THE DIALOG FROM CLOSING (TOUCHING OUTSIDE/BACK BUTTON)
-
-        binding.buttontest.setOnClickListener {
-            dialog.show()
-
-            val replayBtn = dialog.findViewById<Button>(R.id.replay_Btn_dialog_draw)
-            replayBtn.setOnClickListener {
-                resetGame()
-                dialog.dismiss()
-            }
-
-            val exitBtn = dialog.findViewById<Button>(R.id.cancel_dialog_winner)
-            exitBtn.setOnClickListener {
-                finishAffinity()
-            }
-        }
-
-        binding.drawTest.setOnClickListener {
-            obj.drawDialogBox(this,::resetGame)
-        }
 
         // FOR ANIMATED BACKGROUND
         val backBtnGif= binding.btnBackMainActivity
         binding.btnBackMainActivity.setOnClickListener {
+            BtnSound.backBtnAnimated(this)
+            backBtnGif.isClickable = false               // TO DISABLE MULTIPLE CLICK
             Glide.with(this).asGif().load(R.drawable.backbtn2gif).into(backBtnGif) // ANIMATED BACK BUTTON
 
             Handler().postDelayed({ finish()}, 3000)
@@ -67,6 +45,10 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.btnReset.setOnClickListener {
+//            obj.vibrate(this)
+
+            BtnSound.resetBtn(this)
+            Toast.makeText(this, "Game Reset!", Toast.LENGTH_SHORT).show()
             resetGame()
         }
 
@@ -84,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         count++
 
         if (btnCurrent.text == "") {        // CHECK IF BOX IS ALREADY PRESSED
+            BtnSound.boxChecked(this)
 
             if (flag == 0) {                // PLAYER ONE TURN (X)
                 btnCurrent.text = "X"
@@ -196,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun resetGame(){
-        BtnSound.buttonResetSound(this)
+//        BtnSound.buttonResetSound(this)
         binding.btn1.text=""
         binding.btn2.text=""
         binding.btn3.text=""

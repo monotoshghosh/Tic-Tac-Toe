@@ -3,26 +3,26 @@ package com.example.tictactoe
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.tictactoe.databinding.ActivityPlayersNameBinding
-import com.example.tictactoe.isDarkThemeCheck.isDarkMode
-
 
 class PlayersName : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayersNameBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityPlayersNameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
 
         window.apply {
             // SET THE STATUS BAR COLOR TO WHITE
@@ -33,7 +33,10 @@ class PlayersName : AppCompatActivity() {
 
         }
 
+
+
         binding.btnBackPlayersname.setOnClickListener {  // TO MOVE TO TEAM SELECTION ACTIVITY
+            BtnSound.backBtn(this)
             finish()
         }
 
@@ -41,7 +44,7 @@ class PlayersName : AppCompatActivity() {
         binding.btnNextInPlayersName.setOnClickListener {
             if(binding.editTextPlayer1.text.toString().isNotEmpty() && binding.editTextPlayer2.text.toString().isNotEmpty()){
 
-                BtnSound.buttonSound(this)
+                BtnSound.mainBtns(this)
 
                 intent =Intent(this@PlayersName,MainActivity::class.java)
                 val player1Name =binding.editTextPlayer1.text.toString()  // PASSING THE PLAYERS NAME
@@ -81,6 +84,13 @@ class PlayersName : AppCompatActivity() {
 
         // REMOVE ALL THE RESET() OF WINNING
 
+    }
+
+    override fun onDestroy() {
+        Log.d("PlayersName", "onDestroy called")
+
+        stopService(Intent(this, MusicService::class.java))
+        super.onDestroy()
     }
     override fun onBackPressed() { // THIS WILL BE IN THE MAIN ACTIVITY
 

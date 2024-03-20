@@ -20,11 +20,20 @@ class firstscr : AppCompatActivity() {
             decorView.systemUiVisibility= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR        // ICONS -> DARK
         }
 
+        // FOR BACKGROUND MUSIC -- > START
+        // CALLING THE FUNCTION
+//        startMusic()
+
         Handler().postDelayed({       // SHIFTING TO NEW ACTIVITY -> AFTER FEW SECONDS
             startActivity(Intent(this,team_selection::class.java))
             finish()
         },1500)
 
+    }
+
+    // FUINCTION FOR BACKGROUND MUSIC
+    private fun startMusic() {
+        startService(Intent(this, MusicService::class.java))
     }
 
 }

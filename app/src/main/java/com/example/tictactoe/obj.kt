@@ -57,11 +57,13 @@ object obj {
         val replayBtn = dialog.findViewById<Button>(R.id.replay_Btn_dialog_draw)
         replayBtn.setOnClickListener {
             resetGame()
+            BtnSound.replayDialogBox(context as Activity)
             dialog.dismiss()
         }
 
         val exitBtn = dialog.findViewById<Button>(R.id.cancel_dialog_winner)
         exitBtn.setOnClickListener {
+            BtnSound.crossDialogBox(context as Activity)
             (context as Activity).finishAffinity()
         }
     }
@@ -82,12 +84,14 @@ object obj {
 
         val drawDialogBoxEndGame = dialog.findViewById<ImageView>(R.id.drawDialogBoxEndGame)
         drawDialogBoxEndGame.setOnClickListener {
+            BtnSound.crossDialogBox(context as Activity)
             (context as Activity).finishAffinity()
         }
 
         val replay_DrawDialogBox = dialog.findViewById<Button>(R.id.replay_Btn_dialog_draw)
         replay_DrawDialogBox.setOnClickListener {
             resetGame()
+            BtnSound.replayDialogBox(context as Activity)
             dialog.dismiss()
         }
 
