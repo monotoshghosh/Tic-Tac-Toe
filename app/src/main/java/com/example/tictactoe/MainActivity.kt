@@ -47,9 +47,24 @@ class MainActivity : AppCompatActivity() {
         binding.btnReset.setOnClickListener {
 //            obj.vibrate(this)
 
-            BtnSound.resetBtn(this)
-            Toast.makeText(this, "Game Reset!", Toast.LENGTH_SHORT).show()
-            resetGame()
+
+            // RESET BUTTON WILL NOT WORK IF NONE OF THE BUTTONS ARE PRESSED
+            val buttons = arrayOf(binding.btn1,binding.btn2,binding.btn3,binding.btn4,binding.btn5,binding.btn6,binding.btn7,binding.btn8,binding.btn9)
+
+            val isButtonPressed : Boolean = buttons.any { it.text.isNotEmpty() }
+
+            if(isButtonPressed){
+                BtnSound.resetBtn(this)
+                Toast.makeText(this, "Game Reset!", Toast.LENGTH_SHORT).show()
+                resetGame()
+            }
+            else{
+                obj.vibrate(this)
+                BtnSound.buttonErrorSound(this)
+                Toast.makeText(this, "Cannot Reset!!  Game Not Started Yet", Toast.LENGTH_SHORT).show()
+            }
+            
+            
         }
 
         player1NameReceiving = intent.getStringExtra("player1_NameToDisplay").toString()   // ALWAYS DECLARE THE getExtra inside onCreate()..
@@ -180,6 +195,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun resetGame(){
 //        BtnSound.buttonResetSound(this)
+
         binding.btn1.text=""
         binding.btn2.text=""
         binding.btn3.text=""

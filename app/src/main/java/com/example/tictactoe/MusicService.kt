@@ -6,6 +6,10 @@ import android.os.IBinder
 import android.app.Service
 import android.util.Log
 
+
+
+// THIS CLASS IS FOR BACKGROUND MUSIC
+
 class MusicService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
