@@ -30,9 +30,17 @@ class team_selection : AppCompatActivity() {
             startActivity(Intent(this,PlayersName::class.java))
         }
         binding.playComputer.setOnClickListener {            //   ACTION ON CLICKING THE PLAY WITH COMPUTER
-            obj.vibrate(this)
-            BtnSound.buttonErrorSound(this)
-            Toast.makeText(this, "I am still Working", Toast.LENGTH_SHORT).show()
+//            obj.vibrate(this)
+//            BtnSound.buttonErrorSound(this)
+//            Toast.makeText(this, "I am still Working", Toast.LENGTH_SHORT).show()
+
+            BtnSound.mainBtns(this)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("player1_NameToDisplay", "You")
+            intent.putExtra("player2_NameToDisplay", "Computer")
+            intent.putExtra("game_mode", "computer")
+            startActivity(intent)
+
         }
 
         

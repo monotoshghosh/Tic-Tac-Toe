@@ -1,218 +1,177 @@
 package com.example.tictactoe
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.tictactoe.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
-
+import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    var flag =0      // WHICH PLAYER'S TURN
-    var count =0     // IT WILL CHECK WHEN ALL THE BOXs ARE PRESSED
+    private var flag = 0 // WHICH PLAYER'S TURN
+    private var count = 0 // IT WILL CHECK WHEN ALL THE BOXes ARE PRESSED
 
-    lateinit var player1NameReceiving: String
-    lateinit var player2NameReceiving : String
+    private lateinit var player1NameReceiving: String
+    private lateinit var player2NameReceiving: String
+    private lateinit var dialog: Dialog
 
-    lateinit var dialog: Dialog
+    private lateinit var binding: ActivityMainBinding // ALWAYS INITIALIZE SHOULD BE < lateinit var & outside onCreate >
 
-    private lateinit var binding: ActivityMainBinding  // ALWAYS INITIALIZE SHOULD BE < lateinit var & outside onCreate >
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        binding=ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        window.statusBarColor =ContextCompat.getColor(this,R.color.MainScreenColor)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
 
-
         // FOR ANIMATED BACKGROUND
-        val backBtnGif= binding.btnBackMainActivity
+        val backBtnGif = binding.btnBackMainActivity
         binding.btnBackMainActivity.setOnClickListener {
             BtnSound.backBtnAnimated(this)
-            backBtnGif.isClickable = false               // TO DISABLE MULTIPLE CLICK
+            backBtnGif.isClickable = false // TO DISABLE MULTIPLE CLICK
             Glide.with(this).asGif().load(R.drawable.backbtn2gif).into(backBtnGif) // ANIMATED BACK BUTTON
 
-            Handler().postDelayed({ finish()}, 3000)
+            Handler().postDelayed({ finish() }, 3000)
         }
 
-
         binding.btnReset.setOnClickListener {
-//            obj.vibrate(this)
+            val buttons = arrayOf(binding.btn1, binding.btn2, binding.btn3, binding.btn4, binding.btn5, binding.btn6, binding.btn7, binding.btn8, binding.btn9)
+            val isButtonPressed: Boolean = buttons.any { it.text.isNotEmpty() }
 
-
-            // RESET BUTTON WILL NOT WORK IF NONE OF THE BUTTONS ARE PRESSED
-            val buttons = arrayOf(binding.btn1,binding.btn2,binding.btn3,binding.btn4,binding.btn5,binding.btn6,binding.btn7,binding.btn8,binding.btn9)
-
-            val isButtonPressed : Boolean = buttons.any { it.text.isNotEmpty() }
-
-            if(isButtonPressed){
+            if (isButtonPressed) {
                 BtnSound.resetBtn(this)
                 Toast.makeText(this, "Game Reset!", Toast.LENGTH_SHORT).show()
                 resetGame()
-            }
-            else{
+            } else {
                 obj.vibrate(this)
                 BtnSound.buttonErrorSound(this)
-                Toast.makeText(this, "Cannot Reset!!  Game Not Started Yet", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Cannot Reset!! Game Not Started Yet", Toast.LENGTH_SHORT).show()
             }
-            
-            
         }
 
-        player1NameReceiving = intent.getStringExtra("player1_NameToDisplay").toString()   // ALWAYS DECLARE THE getExtra inside onCreate()..
+        player1NameReceiving = intent.getStringExtra("player1_NameToDisplay").toString() // ALWAYS DECLARE THE getExtra inside onCreate()..
         player2NameReceiving = intent.getStringExtra("player2_NameToDisplay").toString()
 
-        binding.currPlayerNameDisplay.text=player1NameReceiving     // ININTIALLY THE currPlayerNameDisplay IS EMPTY
-        binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.red))
+        binding.currPlayerNameDisplay.text = player1NameReceiving // INITIALLY THE currPlayerNameDisplay IS EMPTY
+        binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
 
+        // Set the game mode
+        val gameMode = intent.getStringExtra("game_mode") ?: "person"
+        if (gameMode == "computer") {
+            binding.currPlayerNameDisplay.text = "You"
+        }
     }
 
     fun check(view: View) {
-
         val btnCurrent = view as Button
         count++
 
-        if (btnCurrent.text == "") {        // CHECK IF BOX IS ALREADY PRESSED
+        if (btnCurrent.text == "") { // CHECK IF BOX IS ALREADY PRESSED
             BtnSound.boxChecked(this)
 
-            if (flag == 0) {                // PLAYER ONE TURN (X)
+            if (flag == 0) { // PLAYER ONE TURN (X)
                 btnCurrent.text = "X"
-                btnCurrent.setTextColor(ContextCompat.getColor(this,R.color.red))
+                btnCurrent.setTextColor(ContextCompat.getColor(this, R.color.red))
 
-                binding.currPlayerNameDisplay.text = player2NameReceiving
-                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.green2))
+                binding.currPlayerNameDisplay.text = "Computer"
+                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
 
-                binding.PlayersTurnBox.text="O"
-                binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this,R.color.green))
+                binding.PlayersTurnBox.text = "O"
+                binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
 
                 flag = 1
 
-            } else {                        // PLAYER TWO TURN (O)
-                btnCurrent.text = "O"
-                btnCurrent.setTextColor(ContextCompat.getColor(this,R.color.green))
-
-                binding.currPlayerNameDisplay.text = player1NameReceiving
-                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.red))
-
-                binding.PlayersTurnBox.text="X"
-                binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this,R.color.red))
-
-                flag = 0
-            }
-
-            val b1 = binding.btn1.text.toString()  // STORING THE BUTTON RESPONSE
-            val b2 = binding.btn2.text.toString()
-            val b3 = binding.btn3.text.toString()
-            val b4 = binding.btn4.text.toString()
-            val b5 = binding.btn5.text.toString()
-            val b6 = binding.btn6.text.toString()
-            val b7 = binding.btn7.text.toString()
-            val b8 = binding.btn8.text.toString()
-            val b9 = binding.btn9.text.toString()
-
-            // CHECKING WINNING CONDITION
-
-            if(b1==b2 && b2==b3 && b3!=""){
-                Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving) // FUNCTION CALL TO CHECK WHICH PLAYER WON( NAME )
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)  // FUNCTION TO CALL DIALOG BOX
-            }
-            else if(b4==b5 && b5==b6 && b6!=""){
-                Toast.makeText(this, "Winner $b4", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(b7==b8 && b8==b9 && b9!=""){
-                Toast.makeText(this, "Winner $b7", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(b1==b4 && b4==b7 && b7!=""){
-                Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(b2==b5 && b5==b8 && b8!=""){
-                Toast.makeText(this, "Winner $b2", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(b3==b6 && b6==b9 && b9!=""){
-                Toast.makeText(this, "Winner $b3", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(b1==b5 && b5==b9 && b9!=""){
-                Toast.makeText(this, "Winner $b1", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(b3==b5 && b5==b7 && b7!=""){
-                Toast.makeText(this, "Winner $b3", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                val winningPlayer =obj.checkPlayerName(b1,player1NameReceiving,player2NameReceiving)
-                obj.winnerDialog(this, ::resetGame,winningPlayer,b1)
-
-            }
-            else if(count==9){
-                Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
-                resetGame()
-
-                obj.drawDialogBox(this,::resetGame)
-
-                // DRAW FUNCTION TO BE CALLED HERE.......
+                // Check for win or draw after player move
+                if (!checkWin()) {
+                    Handler().postDelayed({ computerMove() }, 500)
+                }
             }
         }
     }
-    fun resetGame(){
-//        BtnSound.buttonResetSound(this)
 
-        binding.btn1.text=""
-        binding.btn2.text=""
-        binding.btn3.text=""
-        binding.btn4.text=""
-        binding.btn5.text=""
-        binding.btn6.text=""
-        binding.btn7.text=""
-        binding.btn8.text=""
-        binding.btn9.text=""
+    private fun computerMove() {
+        val buttons = arrayOf(binding.btn1, binding.btn2, binding.btn3, binding.btn4, binding.btn5, binding.btn6, binding.btn7, binding.btn8, binding.btn9)
+        val emptyButtons = buttons.filter { it.text == "" }
 
-        flag=0
-        count =0
-        binding.PlayersTurnBox.text="X"
-        binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this,R.color.red))
-        binding.currPlayerNameDisplay.text =player1NameReceiving
-        binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,R.color.red))
+        if (emptyButtons.isNotEmpty()) {
+            val button = emptyButtons.random()
+            button.text = "O"
+            button.setTextColor(ContextCompat.getColor(this, R.color.green))
 
+            binding.currPlayerNameDisplay.text = "You"
+            binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
+
+            binding.PlayersTurnBox.text = "X"
+            binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
+
+            flag = 0
+            count++
+
+            // Check for win or draw after computer move
+            checkWin()
+        }
     }
 
+    private fun checkWin(): Boolean {
+        val b1 = binding.btn1.text.toString()
+        val b2 = binding.btn2.text.toString()
+        val b3 = binding.btn3.text.toString()
+        val b4 = binding.btn4.text.toString()
+        val b5 = binding.btn5.text.toString()
+        val b6 = binding.btn6.text.toString()
+        val b7 = binding.btn7.text.toString()
+        val b8 = binding.btn8.text.toString()
+        val b9 = binding.btn9.text.toString()
+
+        // Winning conditions
+        if ((b1 == b2 && b2 == b3 && b3 != "") ||
+            (b4 == b5 && b5 == b6 && b6 != "") ||
+            (b7 == b8 && b8 == b9 && b9 != "") ||
+            (b1 == b4 && b4 == b7 && b7 != "") ||
+            (b2 == b5 && b5 == b8 && b8 != "") ||
+            (b3 == b6 && b6 == b9 && b9 != "") ||
+            (b1 == b5 && b5 == b9 && b9 != "") ||
+            (b3 == b5 && b5 == b7 && b7 != "")) {
+            val winner = if (flag == 1) "X" else "O"
+            val winningPlayer = if (winner == "X") player1NameReceiving else player2NameReceiving
+            Toast.makeText(this, "Winner $winner", Toast.LENGTH_SHORT).show()
+            obj.winnerDialog(this, ::resetGame, winningPlayer, winner)
+            resetGame()
+            return true
+        }
+
+        if (count == 9) {
+            Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
+            obj.drawDialogBox(this, ::resetGame)
+            resetGame()
+            return true
+        }
+
+        return false
+    }
+
+    private fun resetGame() {
+        binding.btn1.text = ""
+        binding.btn2.text = ""
+        binding.btn3.text = ""
+        binding.btn4.text = ""
+        binding.btn5.text = ""
+        binding.btn6.text = ""
+        binding.btn7.text = ""
+        binding.btn8.text = ""
+        binding.btn9.text = ""
+
+        flag = 0
+        count = 0
+        binding.PlayersTurnBox.text = "X"
+        binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
+        binding.currPlayerNameDisplay.text = player1NameReceiving
+        binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
+    }
 }
