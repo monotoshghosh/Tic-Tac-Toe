@@ -131,6 +131,7 @@ class MainActivity : AppCompatActivity() {
         if (emptyButtons.isNotEmpty()) {
             val button = emptyButtons.random()
             button.text = "O"
+            BtnSound.boxChecked(this)
             button.setTextColor(ContextCompat.getColor(this, R.color.green))
 
             binding.currPlayerNameDisplay.text = "You"
