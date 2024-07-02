@@ -51,4 +51,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0")  // FOR GIF
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")  // FOR GIF
 
+    implementation("com.google.android.gms:play-services-ads:23.2.0")
+
+
 }

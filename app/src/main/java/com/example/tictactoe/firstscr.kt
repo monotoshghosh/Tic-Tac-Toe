@@ -10,9 +10,12 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.tictactoe.databinding.ActivityFirstscrBinding
+import com.google.android.gms.ads.interstitial.InterstitialAd
 
 class firstscr : AppCompatActivity() {
     private lateinit var binding: ActivityFirstscrBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFirstscrBinding.inflate(layoutInflater)

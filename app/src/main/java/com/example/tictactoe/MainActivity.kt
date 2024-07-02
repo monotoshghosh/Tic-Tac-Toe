@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.tictactoe.databinding.ActivityMainBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var gameMode: String // Variable to store the game mode
 
+    private var mInterstitialAd: InterstitialAd? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
+
+        MobileAds.initialize(this@MainActivity) {}
+        loadinterstitialAd()
+
 
         // FOR ANIMATED BACKGROUND
         val backBtnGif = binding.btnBackMainActivity
@@ -171,15 +183,20 @@ class MainActivity : AppCompatActivity() {
             val winner = if (flag == 1) "X" else "O"
             val winningPlayer = if (winner == "X") player1NameReceiving else player2NameReceiving
             Toast.makeText(this, "Winner $winner", Toast.LENGTH_SHORT).show()
-            obj.winnerDialog(this, ::resetGame, winningPlayer, winner)
-            resetGame()
+            obj.winnerDialog(this, {
+                mInterstitialAd?.show(this)
+                resetGame()
+            }, winningPlayer, winner)
             return true
         }
 
         if (count == 9) {
             Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
-            obj.drawDialogBox(this, ::resetGame)
-            resetGame()
+            obj.drawDialogBox(this) {
+                mInterstitialAd?.show(this)
+                resetGame()
+            }
+
             return true
         }
 
@@ -203,5 +220,21 @@ class MainActivity : AppCompatActivity() {
         binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
         binding.currPlayerNameDisplay.text = player1NameReceiving
         binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
+
+        loadinterstitialAd()
+
+    }
+
+    fun loadinterstitialAd(){
+        var adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                mInterstitialAd = null
+            }
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                mInterstitialAd = interstitialAd
+            }
+        })
     }
 }
+
