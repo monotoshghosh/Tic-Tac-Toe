@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.tictactoe.databinding.ActivityFirstscrBinding
 
 class firstscr : AppCompatActivity() {
@@ -14,6 +17,8 @@ class firstscr : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFirstscrBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        hideNavigationBar()
 
         window.apply {    // SETTING THE STATUS BAR
             statusBarColor=ContextCompat.getColor(this@firstscr,R.color.white) // BACKGROUND -> WHITE
@@ -31,9 +36,16 @@ class firstscr : AppCompatActivity() {
 
     }
 
-    // FUINCTION FOR BACKGROUND MUSIC
+    // FUNCTION FOR BACKGROUND MUSIC
     private fun startMusic() {
         startService(Intent(this, MusicService::class.java))
+    }
+
+    private fun hideNavigationBar() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.hide(WindowInsetsCompat.Type.navigationBars())
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
 
 }
