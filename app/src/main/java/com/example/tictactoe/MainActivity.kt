@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding // ALWAYS INITIALIZE SHOULD BE < lateinit var & outside onCreate >
 
+    private lateinit var gameMode: String // Variable to store the game mode
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
 
         // Set the game mode
-        val gameMode = intent.getStringExtra("game_mode") ?: "person"
+        gameMode = intent.getStringExtra("game_mode") ?: "person"
         if (gameMode == "computer") {
             binding.currPlayerNameDisplay.text = "You"
         }
@@ -79,18 +81,45 @@ class MainActivity : AppCompatActivity() {
                 btnCurrent.text = "X"
                 btnCurrent.setTextColor(ContextCompat.getColor(this, R.color.red))
 
-                binding.currPlayerNameDisplay.text = "Computer"
-                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
+                if (gameMode == "computer") {
+                    binding.currPlayerNameDisplay.text = "Computer"
+                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
 
-                binding.PlayersTurnBox.text = "O"
-                binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
+                    binding.PlayersTurnBox.text = "O"
+                    binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
 
-                flag = 1
+                    flag = 1
+
+                    // Check for win or draw after player move
+                    if (!checkWin()) {
+                        Handler().postDelayed({ computerMove() }, 500)
+                    }
+                } else { // Play with Person
+                    binding.currPlayerNameDisplay.text = player2NameReceiving
+                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
+
+                    binding.PlayersTurnBox.text = "O"
+                    binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
+
+                    flag = 1
+
+                    // Check for win or draw after player move
+                    checkWin()
+                }
+            } else { // PLAYER TWO TURN (O)
+                btnCurrent.text = "O"
+                btnCurrent.setTextColor(ContextCompat.getColor(this, R.color.green))
+
+                binding.currPlayerNameDisplay.text = player1NameReceiving
+                binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
+
+                binding.PlayersTurnBox.text = "X"
+                binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
+
+                flag = 0
 
                 // Check for win or draw after player move
-                if (!checkWin()) {
-                    Handler().postDelayed({ computerMove() }, 500)
-                }
+                checkWin()
             }
         }
     }
