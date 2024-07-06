@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var gameMode: String // Variable to store the game mode
 
-    private var mInterstitialAd: InterstitialAd? = null
+    private var wInterstitialAd1: InterstitialAd? = null
+    private var dInterstitialAd2: InterstitialAd? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = 0
 
         MobileAds.initialize(this@MainActivity) {}
-        loadinterstitialAd()
+        loadinterstitialAd1()
+        loadinterstitialAd2()
+
 
 
         // FOR ANIMATED BACKGROUND
@@ -188,7 +191,7 @@ class MainActivity : AppCompatActivity() {
             val winningPlayer = if (winner == "X") player1NameReceiving else player2NameReceiving
             Toast.makeText(this, "Winner $winner", Toast.LENGTH_SHORT).show()
             obj.winnerDialog(this, {
-                mInterstitialAd?.show(this)
+                wInterstitialAd1?.show(this)
                 resetGame()
             }, winningPlayer, winner)
             return true
@@ -197,7 +200,7 @@ class MainActivity : AppCompatActivity() {
         if (count == 9) {
             Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
             obj.drawDialogBox(this) {
-                mInterstitialAd?.show(this)
+                dInterstitialAd2?.show(this)
                 resetGame()
             }
 
@@ -225,18 +228,33 @@ class MainActivity : AppCompatActivity() {
         binding.currPlayerNameDisplay.text = player1NameReceiving
         binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
 
-        loadinterstitialAd()
+        loadinterstitialAd1()
+        loadinterstitialAd2()
 
     }
 
-    fun loadinterstitialAd(){
+    // FOR WINNER
+    fun loadinterstitialAd1(){
         var adRequest = AdRequest.Builder().build()
         InterstitialAd.load(this,"ca-app-pub-8334546624219108/2228115342", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                mInterstitialAd = null
+                wInterstitialAd1 = null
             }
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                mInterstitialAd = interstitialAd
+                wInterstitialAd1 = interstitialAd
+            }
+        })
+    }
+
+    // FOR DRAW
+    fun loadinterstitialAd2(){
+        var adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(this,"ca-app-pub-8334546624219108/3472597025", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                dInterstitialAd2 = null
+            }
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                dInterstitialAd2 = interstitialAd
             }
         })
     }
