@@ -4,9 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.monotoshghosh.tictactoe.R
 import com.monotoshghosh.tictactoe.databinding.ActivityTeamSelectionBinding
 
 class team_selection : AppCompatActivity() {

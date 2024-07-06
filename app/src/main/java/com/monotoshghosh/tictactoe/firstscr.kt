@@ -9,9 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.monotoshghosh.tictactoe.R
 import com.monotoshghosh.tictactoe.databinding.ActivityFirstscrBinding
-import com.google.android.gms.ads.interstitial.InterstitialAd
 
 class firstscr : AppCompatActivity() {
     private lateinit var binding: ActivityFirstscrBinding

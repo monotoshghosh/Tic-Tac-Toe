@@ -2,7 +2,6 @@ package com.monotoshghosh.tictactoe
 
 import android.app.Activity
 import android.media.MediaPlayer
-import com.monotoshghosh.tictactoe.R
 
 object BtnSound {
     private var mediaPlayer: MediaPlayer? = null  // THIS WAS IMPLEMENTED FOR THE ----> fun stopMusic()

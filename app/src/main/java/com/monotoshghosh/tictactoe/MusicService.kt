@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.os.IBinder
 import android.app.Service
 import android.util.Log
-import com.monotoshghosh.tictactoe.R
 
 
 // THIS CLASS IS FOR BACKGROUND MUSIC

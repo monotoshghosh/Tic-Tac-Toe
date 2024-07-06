@@ -11,9 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
-import com.monotoshghosh.tictactoe.R
 
 object obj {
     fun vibrate(context: Context, duration: Long = 200) {           // FUNC FOR VIBRATION
