@@ -10,8 +10,8 @@ android {
     defaultConfig {
         applicationId = "com.monotoshghosh.tictactoe"
         minSdk = 22
-        targetSdk = 33
-        versionCode = 19
+        targetSdk = 34
+        versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
