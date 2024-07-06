@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:fitsSystemWindows="false"
-    tools:context=".PlayersName">
+    tools:context="com.monotoshghosh.tictactoe.PlayersName">
 
     <ImageView
         android:id="@+id/btnBackPlayersname"

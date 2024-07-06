@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.monotoshghosh.tictactoe
 
 import android.app.Activity
 import android.app.Dialog
@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
+import com.monotoshghosh.tictactoe.R
 
 object obj {
     fun vibrate(context: Context, duration: Long = 200) {           // FUNC FOR VIBRATION
@@ -49,10 +50,10 @@ object obj {
         WinnerName.text = winnerName
 
         if(symbol=="X"){
-            WinnerName.setTextColor(ContextCompat.getColor(context,R.color.red))
+            WinnerName.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
         else{
-            WinnerName.setTextColor(ContextCompat.getColor(context,R.color.green2))
+            WinnerName.setTextColor(ContextCompat.getColor(context, R.color.green2))
 
         }
 

@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.monotoshghosh.tictactoe
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.example.tictactoe.databinding.ActivityFirstscrBinding
+import com.monotoshghosh.tictactoe.R
+import com.monotoshghosh.tictactoe.databinding.ActivityFirstscrBinding
 import com.google.android.gms.ads.interstitial.InterstitialAd
 
 class firstscr : AppCompatActivity() {
@@ -24,7 +25,7 @@ class firstscr : AppCompatActivity() {
         hideNavigationBar()
 
         window.apply {    // SETTING THE STATUS BAR
-            statusBarColor=ContextCompat.getColor(this@firstscr,R.color.white) // BACKGROUND -> WHITE
+            statusBarColor=ContextCompat.getColor(this@firstscr, R.color.white) // BACKGROUND -> WHITE
             decorView.systemUiVisibility= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR        // ICONS -> DARK
         }
 
@@ -33,7 +34,7 @@ class firstscr : AppCompatActivity() {
 //        startMusic()
 
         Handler().postDelayed({       // SHIFTING TO NEW ACTIVITY -> AFTER FEW SECONDS
-            startActivity(Intent(this,team_selection::class.java))
+            startActivity(Intent(this, team_selection::class.java))
             finish()
         },1500)
 

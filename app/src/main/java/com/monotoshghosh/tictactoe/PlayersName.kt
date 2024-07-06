@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.monotoshghosh.tictactoe
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.tictactoe.databinding.ActivityPlayersNameBinding
+import com.monotoshghosh.tictactoe.databinding.ActivityPlayersNameBinding
 
 class PlayersName : AppCompatActivity() {
 
@@ -46,7 +46,7 @@ class PlayersName : AppCompatActivity() {
 
                 BtnSound.mainBtns(this)
 
-                intent =Intent(this@PlayersName,MainActivity::class.java)
+                intent =Intent(this@PlayersName, MainActivity::class.java)
                 val player1Name =binding.editTextPlayer1.text.toString()  // PASSING THE PLAYERS NAME
                 val player2Name =binding.editTextPlayer2.text.toString()
                 intent.putExtra("player1_NameToDisplay",player1Name)

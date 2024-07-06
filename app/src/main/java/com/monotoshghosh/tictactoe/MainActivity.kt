@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.monotoshghosh.tictactoe
 
 import android.app.Dialog
 import android.os.Bundle
@@ -9,7 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.example.tictactoe.databinding.ActivityMainBinding
+import com.monotoshghosh.tictactoe.R
+import com.monotoshghosh.tictactoe.databinding.ActivityMainBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
@@ -95,7 +96,9 @@ class MainActivity : AppCompatActivity() {
 
                 if (gameMode == "computer") {
                     binding.currPlayerNameDisplay.text = "Computer"
-                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
+                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,
+                        R.color.green2
+                    ))
 
                     binding.PlayersTurnBox.text = "O"
                     binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
@@ -108,7 +111,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else { // Play with Person
                     binding.currPlayerNameDisplay.text = player2NameReceiving
-                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
+                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,
+                        R.color.green2
+                    ))
 
                     binding.PlayersTurnBox.text = "O"
                     binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))

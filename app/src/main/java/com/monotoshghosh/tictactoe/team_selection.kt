@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.monotoshghosh.tictactoe
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.tictactoe.databinding.ActivityTeamSelectionBinding
+import com.monotoshghosh.tictactoe.R
+import com.monotoshghosh.tictactoe.databinding.ActivityTeamSelectionBinding
 
 class team_selection : AppCompatActivity() {
     private lateinit var binding: ActivityTeamSelectionBinding
@@ -27,7 +28,7 @@ class team_selection : AppCompatActivity() {
         
         binding.playPerson.setOnClickListener {             //   ACTION ON CLICKING THE PLAY WITH PERSON
             BtnSound.mainBtns(this)
-            startActivity(Intent(this,PlayersName::class.java))
+            startActivity(Intent(this, PlayersName::class.java))
         }
         binding.playComputer.setOnClickListener {            //   ACTION ON CLICKING THE PLAY WITH COMPUTER
 //            obj.vibrate(this)

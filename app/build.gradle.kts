@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tictactoe"
+    namespace = "com.monotoshghosh.tictactoe"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.tictactoe"
+        applicationId = "com.monotoshghosh.tictactoe"
         minSdk = 22
         targetSdk = 33
-        versionCode = 1
+        versionCode = 19
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

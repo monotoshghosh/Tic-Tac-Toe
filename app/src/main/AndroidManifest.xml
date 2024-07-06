@@ -16,10 +16,10 @@
         android:theme="@style/Base.Theme.TicTacToe"
         tools:targetApi="31">
         <activity
-            android:name=".PlayersName"
+            android:name="com.monotoshghosh.tictactoe.PlayersName"
             android:exported="false" />
         <activity
-            android:name=".firstscr"
+            android:name="com.monotoshghosh.tictactoe.firstscr"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +28,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".team_selection"
+            android:name="com.monotoshghosh.tictactoe.team_selection"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.monotoshghosh.tictactoe.MainActivity"
             android:exported="false" />
-        <service android:name=".MusicService" />
+        <service android:name="com.monotoshghosh.tictactoe.MusicService" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8334546624219108~9187457123"/>
