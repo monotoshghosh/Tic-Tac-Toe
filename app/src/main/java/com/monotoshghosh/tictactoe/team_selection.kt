@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.monotoshghosh.tictactoe.databinding.ActivityTeamSelectionBinding
 
 class team_selection : AppCompatActivity() {
@@ -18,6 +21,7 @@ class team_selection : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)  // SAME AS DID IN THE firstscr.kt
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        hideNavigationBar()
 
         binding.btnBackTeamSelection.setOnClickListener { // EXIT THE GAME ON CLICKING THE BACK_ICON
             BtnSound.backBtn(this)
@@ -43,6 +47,13 @@ class team_selection : AppCompatActivity() {
         }
 
         
+    }
+
+    private fun hideNavigationBar() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.hide(WindowInsetsCompat.Type.navigationBars())
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
 
 }

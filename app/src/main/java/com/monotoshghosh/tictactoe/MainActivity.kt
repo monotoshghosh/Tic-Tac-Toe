@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.bumptech.glide.Glide
 import com.monotoshghosh.tictactoe.databinding.ActivityMainBinding
 import com.google.android.gms.ads.AdRequest
@@ -40,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
+
+        hideNavigationBar()
 
         MobileAds.initialize(this@MainActivity) {}
         loadinterstitialAd1()
@@ -257,6 +262,13 @@ class MainActivity : AppCompatActivity() {
                 dInterstitialAd2 = interstitialAd
             }
         })
+    }
+
+    private fun hideNavigationBar() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.hide(WindowInsetsCompat.Type.navigationBars())
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
 }
 

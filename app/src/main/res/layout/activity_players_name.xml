@@ -8,6 +8,8 @@
     android:fitsSystemWindows="false"
     tools:context="com.monotoshghosh.tictactoe.PlayersName">
 
+<!--    btnBackPlayersname-->
+
     <ImageView
         android:id="@+id/btnBackPlayersname"
         android:layout_width="35dp"
@@ -18,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"

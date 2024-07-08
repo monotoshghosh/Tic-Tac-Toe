@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.monotoshghosh.tictactoe.databinding.ActivityPlayersNameBinding
 
 class PlayersName : AppCompatActivity() {
@@ -22,7 +25,7 @@ class PlayersName : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
+        hideNavigationBar()
 
         window.apply {
             // SET THE STATUS BAR COLOR TO WHITE
@@ -97,4 +100,12 @@ class PlayersName : AppCompatActivity() {
         super.onBackPressed() // FOR DEFAULT WORK OF BACK BUTTON
         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
     }
+
+    private fun hideNavigationBar() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.hide(WindowInsetsCompat.Type.navigationBars())
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+
 }
