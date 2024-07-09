@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     private var wInterstitialAd1: InterstitialAd? = null
     private var dInterstitialAd2: InterstitialAd? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,11 +45,10 @@ class MainActivity : AppCompatActivity() {
 
         hideNavigationBar()
 
-        MobileAds.initialize(this@MainActivity) {}
-        loadinterstitialAd1()
-        loadinterstitialAd2()
-
-
+        MobileAds.initialize(this@MainActivity) { initializationStatus ->
+            loadInterstitialAd1()
+            loadInterstitialAd2()
+        }
 
         // FOR ANIMATED BACKGROUND
         val backBtnGif = binding.btnBackMainActivity
@@ -103,10 +101,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (gameMode == "computer") {
                     binding.currPlayerNameDisplay.text = "Computer"
-                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,
-                        R.color.green2
-                    ))
-
+                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
                     binding.PlayersTurnBox.text = "O"
                     binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
 
@@ -118,10 +113,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else { // Play with Person
                     binding.currPlayerNameDisplay.text = player2NameReceiving
-                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this,
-                        R.color.green2
-                    ))
-
+                    binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
                     binding.PlayersTurnBox.text = "O"
                     binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
 
@@ -136,7 +128,6 @@ class MainActivity : AppCompatActivity() {
 
                 binding.currPlayerNameDisplay.text = player1NameReceiving
                 binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
-
                 binding.PlayersTurnBox.text = "X"
                 binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
 
@@ -160,7 +151,6 @@ class MainActivity : AppCompatActivity() {
 
             binding.currPlayerNameDisplay.text = "You"
             binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
-
             binding.PlayersTurnBox.text = "X"
             binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
 
@@ -233,18 +223,18 @@ class MainActivity : AppCompatActivity() {
         binding.currPlayerNameDisplay.text = player1NameReceiving
         binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
 
-        loadinterstitialAd1()
-        loadinterstitialAd2()
-
+        loadInterstitialAd1()
+        loadInterstitialAd2()
     }
 
     // FOR WINNER
-    fun loadinterstitialAd1(){
-        var adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(this,"ca-app-pub-8334546624219108/2228115342", adRequest, object : InterstitialAdLoadCallback() {
+    fun loadInterstitialAd1() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(this, "ca-app-pub-8334546624219108/2228115342", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 wInterstitialAd1 = null
             }
+
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 wInterstitialAd1 = interstitialAd
             }
@@ -252,12 +242,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     // FOR DRAW
-    fun loadinterstitialAd2(){
-        var adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(this,"ca-app-pub-8334546624219108/3472597025", adRequest, object : InterstitialAdLoadCallback() {
+    fun loadInterstitialAd2() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(this, "ca-app-pub-8334546624219108/3472597025", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 dInterstitialAd2 = null
             }
+
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 dInterstitialAd2 = interstitialAd
             }
@@ -271,4 +262,3 @@ class MainActivity : AppCompatActivity() {
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
 }
-
