@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="90dp"
         android:layout_marginBottom="521dp"
         app:cardElevation="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:backgroundTint="#0178B7">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#0178B8">
@@ -84,7 +84,7 @@
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="35dp"
         android:columnCount="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -165,7 +165,7 @@
         style="@style/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#AF0202"
         android:text="RESET"
 
@@ -180,7 +180,7 @@
         android:id="@+id/cardView4"
         android:layout_width="179dp"
         android:layout_height="40dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="13dp"
         android:backgroundTint="#74B1E8"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +218,7 @@
         android:id="@+id/cardView2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="33dp"
         app:cardCornerRadius="9dp"
 
         app:cardElevation="15dp"
