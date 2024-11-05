@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             Glide.with(this).asGif().load(R.drawable.backbtn2gif).into(backBtnGif) // ANIMATED BACK BUTTON
 
             Handler().postDelayed({ finish() }, 3000)
+
         }
 
         binding.btnReset.setOnClickListener {
