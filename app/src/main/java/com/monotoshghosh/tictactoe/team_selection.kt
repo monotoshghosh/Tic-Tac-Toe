@@ -21,7 +21,7 @@ class team_selection : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)  // SAME AS DID IN THE firstscr.kt
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
-        hideNavigationBar()
+//        hideNavigationBar()
 
         binding.btnBackTeamSelection.setOnClickListener { // EXIT THE GAME ON CLICKING THE BACK_ICON
             BtnSound.backBtn(this)

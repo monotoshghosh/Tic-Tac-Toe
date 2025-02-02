@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
 
-        hideNavigationBar()
+//        hideNavigationBar()
 
         MobileAds.initialize(this@MainActivity) { initializationStatus ->
             loadInterstitialAd1()

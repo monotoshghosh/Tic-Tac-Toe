@@ -25,7 +25,7 @@ class PlayersName : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        hideNavigationBar()
+//        hideNavigationBar()
 
         window.apply {
             // SET THE STATUS BAR COLOR TO WHITE
