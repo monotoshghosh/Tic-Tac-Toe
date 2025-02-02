@@ -8,30 +8,31 @@
     android:fitsSystemWindows="false"
     tools:context="com.monotoshghosh.tictactoe.PlayersName">
 
-
     <ImageView
         android:id="@+id/btnBackPlayersname"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="36dp"
         android:src="@drawable/backbtn1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBackPlayersname">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,7 +47,7 @@
                 android:gravity="center"
                 android:text="Enter Player's\nName"
                 android:textColor="#037CBF"
-                android:textSize="30sp"
+                android:textSize="30dp"
                 android:textStyle="bold" />
 
             <View
@@ -71,7 +72,7 @@
                     android:id="@+id/editTextPlayer1"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
-                    android:drawableStart="@drawable/close"
+                    android:drawableStart="@drawable/xicon"
                     android:drawablePadding="16dp"
                     android:hint="Player 1"
                     android:inputType="text"
@@ -80,7 +81,7 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
                     android:textColorHint="#AEAAAA"
-                    android:textSize="20sp" />
+                    android:textSize="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +101,7 @@
                     android:id="@+id/editTextPlayer2"
                     android:layout_width="250dp"
                     android:layout_height="60dp"
-                    android:drawableStart="@drawable/icono"
+                    android:drawableStart="@drawable/oicon"
                     android:drawablePadding="16dp"
                     android:hint="Player 2"
                     android:inputType="text"
@@ -109,7 +110,7 @@
                     android:textColor="@color/black"
                     android:textColorHighlight="#ADDDF6"
                     android:textColorHint="#AEAAAA"
-                    android:textSize="20sp" />
+                    android:textSize="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,17 +122,16 @@
         android:id="@+id/btnNextInPlayersName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:elevation="10dp"
         android:text="NEXT"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="bold"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.771" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
