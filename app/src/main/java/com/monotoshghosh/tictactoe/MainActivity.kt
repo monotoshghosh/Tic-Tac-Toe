@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private var flag = 0 // WHICH PLAYER'S TURN
     private var count = 0 // IT WILL CHECK WHEN ALL THE BOXes ARE PRESSED
 
+    private var winDrawCounter = 0; // TRACK THE NO OF WIN OR DRAW
+
     private lateinit var player1NameReceiving: String
     private lateinit var player2NameReceiving: String
     private lateinit var dialog: Dialog
@@ -186,8 +188,13 @@ class MainActivity : AppCompatActivity() {
             val winner = if (flag == 1) "X" else "O"
             val winningPlayer = if (winner == "X") player1NameReceiving else player2NameReceiving
             Toast.makeText(this, "Winner $winner", Toast.LENGTH_SHORT).show()
+
+            winDrawCounter++; // INCREMENT THE VARIABLE FOR WIN
+
             obj.winnerDialog(this, {
-                wInterstitialAd1?.show(this)
+                if(winDrawCounter % 3 == 0){  // SHOWING THE ADV. IF WIN COUNT IS 3 TIMES
+                    wInterstitialAd1?.show(this)
+                }
                 resetGame()
             }, winningPlayer, winner)
             return true
@@ -195,8 +202,11 @@ class MainActivity : AppCompatActivity() {
 
         if (count == 9) {
             Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
+            winDrawCounter++; // // INCREMENT THE VARIABLE FOR DRAW
             obj.drawDialogBox(this) {
-                dInterstitialAd2?.show(this)
+                if(winDrawCounter % 3 == 0){    // SHOWING THE ADV. IF DRAW COUNT IS 3 TIMES
+                    dInterstitialAd2?.show(this)
+                }
                 resetGame()
             }
 
