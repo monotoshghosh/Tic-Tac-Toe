@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.monotoshghosh.tictactoe"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.monotoshghosh.tictactoe"
-        minSdk = 22
+        minSdk = 24
         targetSdk = 34
         versionCode = 4
         versionName = "1.2"
