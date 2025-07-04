@@ -10,5 +10,8 @@
         <item name="android:statusBarColor">#0178B7</item>
         <item name="colorAccent">#0178B7</item>
         <item name="colorPrimary">#0178B7</item>
+
+        <!--    THIS IS FOR NAVIGATION BTN BAR COLOR   -->
+        <item name="android:navigationBarColor">#000000</item>
     </style>
 </resources>
