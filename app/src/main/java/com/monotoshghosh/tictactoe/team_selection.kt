@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,6 +14,7 @@ import com.monotoshghosh.tictactoe.databinding.ActivityTeamSelectionBinding
 class team_selection : AppCompatActivity() {
     private lateinit var binding: ActivityTeamSelectionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = ActivityTeamSelectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
