@@ -15,16 +15,20 @@ import com.monotoshghosh.tictactoe.databinding.ActivityTeamSelectionBinding
 class team_selection : AppCompatActivity() {
     private lateinit var binding: ActivityTeamSelectionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        enableEdgeToEdge()                                       // API 35
         super.onCreate(savedInstanceState)
         binding = ActivityTeamSelectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        applyDisplayCutout()
+        // Apply display cutout handling
+        applyDisplayCutout()                                     // API 35
 
+        // Set status bar color and dark icons
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white) // SAME AS DID IN THE firstscr.kt
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+        insetsController.isAppearanceLightStatusBars = true  // Makes status bar icons dark
 
-        window.statusBarColor = ContextCompat.getColor(this, R.color.white)  // SAME AS DID IN THE firstscr.kt
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
 //        hideNavigationBar()
 
