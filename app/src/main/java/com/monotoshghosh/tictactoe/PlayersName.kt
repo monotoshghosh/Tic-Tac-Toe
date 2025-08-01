@@ -6,8 +6,10 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -19,10 +21,20 @@ class PlayersName : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()                                       // API 35
         super.onCreate(savedInstanceState)
 
         binding = ActivityPlayersNameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Apply display cutout handling
+        applyDisplayCutout()                                     // API 35
+
+        // Set status bar color and dark icons
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+        insetsController.isAppearanceLightStatusBars = true  // Makes status bar icons dark
 
 
 //        hideNavigationBar()
@@ -107,5 +119,18 @@ class PlayersName : AppCompatActivity() {
         controller.hide(WindowInsetsCompat.Type.navigationBars())
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
     }
+
+    private fun applyDisplayCutout(){
+        ViewCompat.setOnApplyWindowInsetsListener(binding.playersNameConstLayout) { view, insets ->
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or
+                        WindowInsetsCompat.Type.displayCutout()
+            )
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
+
+    }
+
 
 }

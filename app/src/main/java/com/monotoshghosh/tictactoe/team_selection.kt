@@ -24,7 +24,7 @@ class team_selection : AppCompatActivity() {
         applyDisplayCutout()                                     // API 35
 
         // Set status bar color and dark icons
-        window.statusBarColor = ContextCompat.getColor(this, R.color.white) // SAME AS DID IN THE firstscr.kt
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
         WindowCompat.setDecorFitsSystemWindows(window, true)
         val insetsController = WindowInsetsControllerCompat(window, window.decorView)
         insetsController.isAppearanceLightStatusBars = true  // Makes status bar icons dark
