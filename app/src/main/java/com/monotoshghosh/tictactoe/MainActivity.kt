@@ -6,8 +6,10 @@ import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -38,9 +40,13 @@ class MainActivity : AppCompatActivity() {
     private var dInterstitialAd2: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()                                       // API 35
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Apply display cutout handling
+        applyDisplayCutout()                                     // API 35
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.MainScreenColor)
         window.decorView.systemUiVisibility = 0
@@ -271,5 +277,17 @@ class MainActivity : AppCompatActivity() {
         val controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.hide(WindowInsetsCompat.Type.navigationBars())
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+
+    private fun applyDisplayCutout(){
+        ViewCompat.setOnApplyWindowInsetsListener(binding.mainActivityConstLayout) { view, insets ->
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or
+                        WindowInsetsCompat.Type.displayCutout()
+            )
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
+
     }
 }
