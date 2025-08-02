@@ -1,6 +1,7 @@
 package com.monotoshghosh.tictactoe
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -14,64 +15,64 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.bumptech.glide.Glide
-import com.monotoshghosh.tictactoe.databinding.ActivityMainBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.monotoshghosh.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var flag = 0 // WHICH PLAYER'S TURN
-    private var count = 0 // IT WILL CHECK WHEN ALL THE BOXes ARE PRESSED
-
-    private var winDrawCounter = 0; // TRACK THE NO OF WIN OR DRAW
+    private var flag = 0
+    private var count = 0
+    private var winDrawCounter = 0
 
     private lateinit var player1NameReceiving: String
     private lateinit var player2NameReceiving: String
     private lateinit var dialog: Dialog
 
-    private lateinit var binding: ActivityMainBinding // ALWAYS INITIALIZE SHOULD BE < lateinit var & outside onCreate >
-
-    private lateinit var gameMode: String // Variable to store the game mode
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var gameMode: String
 
     private var wInterstitialAd1: InterstitialAd? = null
     private var dInterstitialAd2: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()                                       // API 35
+        enableEdgeToEdge() // API 33+
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Apply display cutout handling
-        applyDisplayCutout()                                     // API 35
+        // ✅ Proper edge-to-edge handling
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        window.statusBarColor = ContextCompat.getColor(this, R.color.MainScreenColor)
-        window.decorView.systemUiVisibility = 0
+        // Set black background for navigation bar
+        window.navigationBarColor = Color.BLACK
 
-//        hideNavigationBar()
+        // Make nav and status bar icons light (white)
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightNavigationBars = false
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
-        MobileAds.initialize(this@MainActivity) { initializationStatus ->
+
+        applyDisplayCutout()
+
+        MobileAds.initialize(this@MainActivity) {
             loadInterstitialAd1()
             loadInterstitialAd2()
         }
 
-        // FOR ANIMATED BACKGROUND
-        val backBtnGif = binding.btnBackMainActivity
         binding.btnBackMainActivity.setOnClickListener {
             BtnSound.backBtnAnimated(this)
-            backBtnGif.isClickable = false // TO DISABLE MULTIPLE CLICK
-            Glide.with(this).asGif().load(R.drawable.backbtn2gif).into(backBtnGif) // ANIMATED BACK BUTTON
-
+            binding.btnBackMainActivity.isClickable = false
+            Glide.with(this).asGif().load(R.drawable.backbtn2gif).into(binding.btnBackMainActivity)
             Handler().postDelayed({ finish() }, 3000)
-
         }
 
         binding.btnReset.setOnClickListener {
             val buttons = arrayOf(binding.btn1, binding.btn2, binding.btn3, binding.btn4, binding.btn5, binding.btn6, binding.btn7, binding.btn8, binding.btn9)
-            val isButtonPressed: Boolean = buttons.any { it.text.isNotEmpty() }
+            val isButtonPressed = buttons.any { it.text.isNotEmpty() }
 
             if (isButtonPressed) {
                 BtnSound.resetBtn(this)
@@ -84,13 +85,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        player1NameReceiving = intent.getStringExtra("player1_NameToDisplay").toString() // ALWAYS DECLARE THE getExtra inside onCreate()..
+        player1NameReceiving = intent.getStringExtra("player1_NameToDisplay").toString()
         player2NameReceiving = intent.getStringExtra("player2_NameToDisplay").toString()
 
-        binding.currPlayerNameDisplay.text = player1NameReceiving // INITIALLY THE currPlayerNameDisplay IS EMPTY
+        binding.currPlayerNameDisplay.text = player1NameReceiving
         binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
 
-        // Set the game mode
         gameMode = intent.getStringExtra("game_mode") ?: "person"
         if (gameMode == "computer") {
             binding.currPlayerNameDisplay.text = "You"
@@ -101,10 +101,10 @@ class MainActivity : AppCompatActivity() {
         val btnCurrent = view as Button
         count++
 
-        if (btnCurrent.text == "") { // CHECK IF BOX IS ALREADY PRESSED
+        if (btnCurrent.text == "") {
             BtnSound.boxChecked(this)
 
-            if (flag == 0) { // PLAYER ONE TURN (X)
+            if (flag == 0) {
                 btnCurrent.text = "X"
                 btnCurrent.setTextColor(ContextCompat.getColor(this, R.color.red))
 
@@ -113,36 +113,27 @@ class MainActivity : AppCompatActivity() {
                     binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
                     binding.PlayersTurnBox.text = "O"
                     binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
-
                     flag = 1
 
-                    // Check for win or draw after player move
                     if (!checkWin()) {
                         Handler().postDelayed({ computerMove() }, 500)
                     }
-                } else { // Play with Person
+                } else {
                     binding.currPlayerNameDisplay.text = player2NameReceiving
                     binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.green2))
                     binding.PlayersTurnBox.text = "O"
                     binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.green))
-
                     flag = 1
-
-                    // Check for win or draw after player move
                     checkWin()
                 }
-            } else { // PLAYER TWO TURN (O)
+            } else {
                 btnCurrent.text = "O"
                 btnCurrent.setTextColor(ContextCompat.getColor(this, R.color.green))
-
                 binding.currPlayerNameDisplay.text = player1NameReceiving
                 binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
                 binding.PlayersTurnBox.text = "X"
                 binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
-
                 flag = 0
-
-                // Check for win or draw after player move
                 checkWin()
             }
         }
@@ -157,65 +148,52 @@ class MainActivity : AppCompatActivity() {
             button.text = "O"
             BtnSound.boxChecked(this)
             button.setTextColor(ContextCompat.getColor(this, R.color.green))
-
             binding.currPlayerNameDisplay.text = "You"
             binding.currPlayerNameDisplay.setTextColor(ContextCompat.getColor(this, R.color.red))
             binding.PlayersTurnBox.text = "X"
             binding.PlayersTurnBox.setTextColor(ContextCompat.getColor(this, R.color.red))
-
             flag = 0
             count++
-
-            // Check for win or draw after computer move
             checkWin()
         }
     }
 
     private fun checkWin(): Boolean {
-        val b1 = binding.btn1.text.toString()
-        val b2 = binding.btn2.text.toString()
-        val b3 = binding.btn3.text.toString()
-        val b4 = binding.btn4.text.toString()
-        val b5 = binding.btn5.text.toString()
-        val b6 = binding.btn6.text.toString()
-        val b7 = binding.btn7.text.toString()
-        val b8 = binding.btn8.text.toString()
-        val b9 = binding.btn9.text.toString()
+        val b = arrayOf(
+            binding.btn1.text.toString(), binding.btn2.text.toString(), binding.btn3.text.toString(),
+            binding.btn4.text.toString(), binding.btn5.text.toString(), binding.btn6.text.toString(),
+            binding.btn7.text.toString(), binding.btn8.text.toString(), binding.btn9.text.toString()
+        )
 
-        // Winning conditions
-        if ((b1 == b2 && b2 == b3 && b3 != "") ||
-            (b4 == b5 && b5 == b6 && b6 != "") ||
-            (b7 == b8 && b8 == b9 && b9 != "") ||
-            (b1 == b4 && b4 == b7 && b7 != "") ||
-            (b2 == b5 && b5 == b8 && b8 != "") ||
-            (b3 == b6 && b6 == b9 && b9 != "") ||
-            (b1 == b5 && b5 == b9 && b9 != "") ||
-            (b3 == b5 && b5 == b7 && b7 != "")) {
-            val winner = if (flag == 1) "X" else "O"
-            val winningPlayer = if (winner == "X") player1NameReceiving else player2NameReceiving
-            Toast.makeText(this, "Winner $winner", Toast.LENGTH_SHORT).show()
+        val winLines = arrayOf(
+            Triple(0, 1, 2), Triple(3, 4, 5), Triple(6, 7, 8),
+            Triple(0, 3, 6), Triple(1, 4, 7), Triple(2, 5, 8),
+            Triple(0, 4, 8), Triple(2, 4, 6)
+        )
 
-            winDrawCounter++; // INCREMENT THE VARIABLE FOR WIN
+        for ((i, j, k) in winLines) {
+            if (b[i] == b[j] && b[j] == b[k] && b[i].isNotEmpty()) {
+                val winner = if (flag == 1) "X" else "O"
+                val winningPlayer = if (winner == "X") player1NameReceiving else player2NameReceiving
+                Toast.makeText(this, "Winner $winner", Toast.LENGTH_SHORT).show()
 
-            obj.winnerDialog(this, {
-                if(winDrawCounter % 3 == 0){  // SHOWING THE ADV. IF WIN COUNT IS 3 TIMES
-                    wInterstitialAd1?.show(this)
-                }
-                resetGame()
-            }, winningPlayer, winner)
-            return true
+                winDrawCounter++
+
+                obj.winnerDialog(this, {
+                    if (winDrawCounter % 3 == 0) wInterstitialAd1?.show(this)
+                    resetGame()
+                }, winningPlayer, winner)
+                return true
+            }
         }
 
         if (count == 9) {
             Toast.makeText(this, "DRAW", Toast.LENGTH_SHORT).show()
-            winDrawCounter++; // // INCREMENT THE VARIABLE FOR DRAW
+            winDrawCounter++
             obj.drawDialogBox(this) {
-                if(winDrawCounter % 3 == 0){    // SHOWING THE ADV. IF DRAW COUNT IS 3 TIMES
-                    dInterstitialAd2?.show(this)
-                }
+                if (winDrawCounter % 3 == 0) dInterstitialAd2?.show(this)
                 resetGame()
             }
-
             return true
         }
 
@@ -223,16 +201,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetGame() {
-        binding.btn1.text = ""
-        binding.btn2.text = ""
-        binding.btn3.text = ""
-        binding.btn4.text = ""
-        binding.btn5.text = ""
-        binding.btn6.text = ""
-        binding.btn7.text = ""
-        binding.btn8.text = ""
-        binding.btn9.text = ""
-
+        val buttons = arrayOf(binding.btn1, binding.btn2, binding.btn3, binding.btn4, binding.btn5, binding.btn6, binding.btn7, binding.btn8, binding.btn9)
+        for (btn in buttons) btn.text = ""
         flag = 0
         count = 0
         binding.PlayersTurnBox.text = "X"
@@ -244,8 +214,7 @@ class MainActivity : AppCompatActivity() {
         loadInterstitialAd2()
     }
 
-    // FOR WINNER
-    fun loadInterstitialAd1() {
+    private fun loadInterstitialAd1() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(this, "ca-app-pub-8334546624219108/2228115342", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -258,8 +227,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    // FOR DRAW
-    fun loadInterstitialAd2() {
+    private fun loadInterstitialAd2() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(this, "ca-app-pub-8334546624219108/3472597025", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -272,14 +240,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun hideNavigationBar() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        val controller = WindowInsetsControllerCompat(window, window.decorView)
-        controller.hide(WindowInsetsCompat.Type.navigationBars())
-        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-    }
-
-    private fun applyDisplayCutout(){
+    private fun applyDisplayCutout() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.mainActivityConstLayout) { view, insets ->
             val systemBars = insets.getInsets(
                 WindowInsetsCompat.Type.systemBars() or
@@ -288,6 +249,5 @@ class MainActivity : AppCompatActivity() {
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             WindowInsetsCompat.CONSUMED
         }
-
     }
 }
