@@ -48,7 +48,7 @@
 
             <Button
                 android:id="@+id/playPerson"
-                android:layout_width="278dp"
+                android:layout_width="300dp"
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:backgroundTint="#0176B5"
@@ -73,7 +73,7 @@
 
             <Button
                 android:id="@+id/playComputer"
-                android:layout_width="278dp"
+                android:layout_width="300dp"
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:backgroundTint="#0176B5"
